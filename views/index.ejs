@@ -14,19 +14,20 @@
         <form method="POST" action="/">
             <div class="form_container">
                 <div class="input_container">
-                    <input type="text" name="title" id="title">
-                    <label for="title">Task Title</label>
+                    <input type="text" name="title" id="title" minlength="3" required>
+                    <label for="title">Task Title*</label>
+                    <p class="input_help">Please enter a title (min. 3 characters)</p>
                 </div>
                 <div class="input_container">
                     <label for="description">Task description</label>
                     <textarea name="description" id="description"></textarea>
                 </div>
                 <div class="input_container">
-                    <input type="datetime-local" name="due" id="due">
-                    <label for="due">Task due</label>
+                    <input type="datetime-local" name="due" id="due" min="<%= now %>">
+                    <label for="due">Task due*</label>
                 </div>
                 <div class="input_container">
-                    <input type="submit" value="Add Task">
+                    <input class="btn" type="submit" value="Add Task">
                 </div>
             </div>
         </form>
@@ -36,9 +37,9 @@
                     <a href="/tasks/<%= task.task_id %>">
                         <div class="card-content">
                             <h1 class="task-title"><%= task.title %></h1>
-                            <div class="status_tag"><%= task.task_status %></div>
+                            <div class="status_tag <%= task.task_status == 'Draft' ? 'tag_draft' : task.task_status == 'ToDo' ? 'tag_todo' : 'tag_completed' %>"><%= task.task_status %></div>
                             <em class="task-due"><%= task.due.date %> - (in <%= Math.floor(task.due.countdown) %> day<%= Math.floor(task.due.countdown) == 1 ? "" : "s" %>)</em>
-                            <p class="task-description"><%= task.description %></p>
+                            <p class="task-description"><%= task.description.substring(10) %><%= task.description.length > 10 ? "..." : "" %></p>
                         </div>
                     </a>
                 </div>

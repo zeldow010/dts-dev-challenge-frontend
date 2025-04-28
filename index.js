@@ -23,7 +23,7 @@ app.get('/', async (req, res) => {
         }
     });
 
-    res.render('index', { tasks });
+    res.render('index', { tasks, now: DateTime.now().toFormat("yyyy-MM-dd'T'hh:mm") });
 });
 
 app.post('/', async (req, res) => {
@@ -42,7 +42,10 @@ app.post('/', async (req, res) => {
             "Content-Type": "application/json"
         }
     }).then(async result => await result.json())
-    .catch(err => console.error(err));
+    .catch(err => { 
+        console.error(err);
+        return res.redirect('/');
+    });
 
     console.log(`got a new task_id: ${task_id}}`);
 
@@ -54,6 +57,14 @@ app.get('/tasks/:task_id', async (req, res) => {
 
     let task = await fetch(`http://localhost:3000/tasks/${task_id}`)
         .then(async res => await res.json());
+
+    let dt = DateTime.fromISO(task.due);
+
+    task.due = {
+        raw: task.due,
+        date: dt.toUTC().toFormat("dd/MM/yyyy"),
+        countdown: dt.diffNow().as("days")
+    }
 
     res.render('task', { task });
 });

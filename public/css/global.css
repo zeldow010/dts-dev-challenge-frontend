@@ -10,20 +10,39 @@ html, main {
 }
 
 main {
-    display: grid;
-    grid-template-columns: 25% auto;
-    gap: 1em;
+    max-width: 70ch;
+    margin: 0 auto;
 }
 
-.right_side {
-    border-left: 1px solid grey;
-    padding: 0 1em;
+.status_tag {
+    font-weight: bold;
+    border-radius: 50vw;
+    padding: 0.5em 1em;
+    text-align: center;
+}
+
+.tag_draft {
+    font-style: italic;
+}
+
+.tag_todo {
+    background-color: orangered;
+    color: white;
+}
+
+.tag_completed {
+    background-color: green;
+    color: white;
 }
 
 .task_list {
     margin-top: 2em;
     padding-top: 2em;
     border-top: 1px solid grey;
+}
+
+.task-due {
+    margin-top: 0.25em;
 }
 
 .input_container {
@@ -39,6 +58,15 @@ main {
 .input_container>label {
     position: absolute;
     top:.5em;
+    font-size: .8em;
+    font-weight: bold;
+}
+
+.input_container>.input_help {
+    margin: 0;
+    margin-top:.2em;
+    font-size: 0.8em;
+    font-style: italic;
 }
 
 a {
@@ -50,8 +78,8 @@ a {
     padding: .5em 1em;
     display: grid;
     grid-template-rows: auto auto auto;
-    grid-template-columns: 1fr 10%;
-    justify-content: center;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -69,4 +97,47 @@ a {
 
 .card:hover, .selected {
     background-color: #eee;
+}
+
+.btn {
+    padding: .5em 1em;
+    font-weight: bold;
+    background: forestgreen;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn:not(:disabled):hover {
+    background: hsl(120, 61%, 24%);
+}
+
+.btn:disabled {
+    filter: saturate(0);
+    cursor: not-allowed;
+}
+
+.btn-delete {
+    background: red;
+}
+
+.btn-delete:hover {
+    background: hsl(0, 100%, 20%);
+}
+
+.task_options {
+    display: flex;
+    gap: 1em;
+    flex-direction: row;
+    margin-top: 1em;
+    justify-content: end;
+}
+
+.title_section {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    justify-content: space-between;
 }
