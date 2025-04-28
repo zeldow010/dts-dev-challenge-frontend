@@ -1,0 +1,72 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, main {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 25% auto;
+    gap: 1em;
+}
+
+.right_side {
+    border-left: 1px solid grey;
+    padding: 0 1em;
+}
+
+.task_list {
+    margin-top: 2em;
+    padding-top: 2em;
+    border-top: 1px solid grey;
+}
+
+.input_container {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.input_container>input, .input_container>textarea {
+    margin-top: 2em;
+}
+
+.input_container>label {
+    position: absolute;
+    top:.5em;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.card-content {
+    padding: .5em 1em;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 1fr 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-due, .task-description {
+    grid-column: 1 / span 2;
+}
+
+.task-title {
+    margin: 0;
+}
+
+.card {
+    border-bottom: 1px solid grey;
+}
+
+.card:hover, .selected {
+    background-color: #eee;
+}
